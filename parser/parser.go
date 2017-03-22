@@ -181,6 +181,23 @@ func walk(input []token.Token) ASTNode {
 			Body:  []ASTNode{},
 		}
 	}
+	if tok.Type == token.LBRACE {
+		currentPos++
+		return ASTNode{
+			Type:  "LBRACE",
+			Value: tok.Literal,
+			Body:  []ASTNode{},
+		}
+	}
+
+	if tok.Type == token.RBRACE {
+		currentPos++
+		return ASTNode{
+			Type:  "RBRACE",
+			Value: tok.Literal,
+			Body:  []ASTNode{},
+		}
+	}
 
 	currentPos++
 	return ASTNode{
