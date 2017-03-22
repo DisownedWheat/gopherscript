@@ -1,6 +1,7 @@
 package main
 
 import (
+	"disownedwheat/gopherscript/generator"
 	"disownedwheat/gopherscript/lexer"
 	"disownedwheat/gopherscript/parser"
 	"disownedwheat/gopherscript/token"
@@ -16,7 +17,14 @@ let z = (x, y) -> {
 }
 let testFunc = () -> print("This is working!")
 let value = do -> return x
-	`
+`
+
+	input = `
+	let z = (x, y) -> {
+		print(x);
+	}
+	let testFunc = () -> print("This is working!")
+`
 
 	lex := []token.Token{}
 	l := lexer.New(input)
@@ -27,8 +35,6 @@ let value = do -> return x
 			lex = append(lex, tok)
 		}
 	}
-
-	fmt.Println(lex)
-	fmt.Println(parser.Parse(lex))
-
+	// fmt.Println(parser.Parse(lex))
+	fmt.Println(generator.Generate(parser.Parse(lex)))
 }
