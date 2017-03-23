@@ -84,7 +84,12 @@ func walk(input []token.Token) ASTNode {
 	}
 	if tok.Type == token.LPAREN && input[currentPos-1].Type == token.IDENT {
 		currentPos++
-		var body []ASTNode
+		body := []ASTNode{ASTNode{
+			Type:  token.LPAREN,
+			Value: "(",
+			Body:  []ASTNode{},
+		},
+		}
 		for input[currentPos].Type != token.RPAREN {
 			body = append(body, walk(input))
 			tok = input[currentPos]
